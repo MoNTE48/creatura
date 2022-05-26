@@ -113,7 +113,6 @@ function creatura.get_boid_angle(self, boid, range) -- calculates boid angle bas
         local boid = boids[i]
         if boid:get_pos() then
             local boid_pos = boid:get_pos()
-            local boid_yaw = boid:get_yaw()
             table.insert(positions, boid_pos)
             if boid ~= self.object then
                 table.insert(lifts, vec_normal(boid:get_velocity()).y)
@@ -125,7 +124,7 @@ function creatura.get_boid_angle(self, boid, range) -- calculates boid angle bas
             end
         end
     end
-    if #positions < 3 then return end  
+    if #positions < 3 then return end
     local center = get_average_pos(positions)
     local dir2closest = vec_dir(pos, closest_pos)
     -- Calculate Parameters

@@ -184,7 +184,7 @@ function creatura.find_path(self, start, goal, obj_width, obj_height, max_open, 
             y = floor(start.y + 0.5),
             z = floor(start.z + 0.5)
         }
-    
+
         goal = {
             x = floor(goal.x + 0.5),
             y = floor(goal.y + 0.5),
@@ -195,22 +195,22 @@ function creatura.find_path(self, start, goal, obj_width, obj_height, max_open, 
         and goal.z == start.z then -- No path can be found
             return nil
         end
-    
+
         local openSet = self._path_data.open or {}
-    
+
         local closedSet = self._path_data.closed or {}
-    
+
         local start_index = minetest.hash_node_position(start)
-    
+
         openSet[start_index] = {
             pos = start,
             parent = nil,
             gScore = 0,
             fScore = get_distance(start, goal)
         }
-    
+
         local count = self._path_data.count or 1
-    
+
         while count > 0 do
             if minetest.get_us_time() - us_time > a_star_alloted_time then
                 self._path_data = {
@@ -224,14 +224,14 @@ function creatura.find_path(self, start, goal, obj_width, obj_height, max_open, 
             -- Initialize ID and data
             local current_id
             local current
-    
+
             -- Get an initial id in open set
             for i, v in pairs(openSet) do
                 current_id = i
                 current = v
                 break
             end
-    
+
             -- Find lowest f cost
             for i, v in pairs(openSet) do
                 if v.fScore < current.fScore then
@@ -239,7 +239,7 @@ function creatura.find_path(self, start, goal, obj_width, obj_height, max_open, 
                     current = v
                 end
             end
-    
+
             -- Add lowest fScore to closedSet and remove from openSet
             openSet[current_id] = nil
             closedSet[current_id] = current
@@ -272,11 +272,11 @@ function creatura.find_path(self, start, goal, obj_width, obj_height, max_open, 
                 self._path_data = {}
                 return reverse_path
             end
-    
+
             count = count - 1
-    
+
             local adjacent = get_neighbors(current.pos, obj_width, obj_height, path_neighbors, openSet, closedSet)
-    
+
             -- Go through neighboring nodes
             for i = 1, #adjacent do
                 local neighbor = {
@@ -434,7 +434,7 @@ function creatura.find_theta_path(self, start, goal, obj_width, obj_height, max_
             y = floor(start.y + 0.5),
             z = floor(start.z + 0.5)
         }
-    
+
         goal = {
             x = floor(goal.x + 0.5),
             y = floor(goal.y + 0.5),
@@ -445,22 +445,22 @@ function creatura.find_theta_path(self, start, goal, obj_width, obj_height, max_
         and goal.z == start.z then -- No path can be found
             return nil
         end
-    
+
         local openSet = self._path_data.open or {}
-    
+
         local closedSet = self._path_data.closed or {}
-    
+
         local start_index = minetest.hash_node_position(start)
-    
+
         openSet[start_index] = {
             pos = start,
             parent = nil,
             gScore = 0,
             fScore = get_distance(start, goal)
         }
-    
+
         local count = self._path_data.count or 1
-    
+
         while count > 0 do
             if minetest.get_us_time() - us_time > theta_star_alloted_time then
                 self._path_data = {
@@ -518,11 +518,11 @@ function creatura.find_theta_path(self, start, goal, obj_width, obj_height, max_
                 self._path_data = {}
                 return reverse_path
             end
-    
+
             count = count - 1
-    
+
             local adjacent = get_neighbors(current.pos, obj_width, obj_height, path_neighbors, openSet, closedSet)
-    
+
             -- Go through neighboring nodes
             for i = 1, #adjacent do
                 local neighbor = {

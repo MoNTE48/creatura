@@ -79,7 +79,7 @@ local function get_collision(self, yaw)
                     return true, pointed_thing.intersection_point
                 end
             end
-        end 
+        end
     end
     return false
 end
@@ -324,7 +324,6 @@ local function get_obstacle_avoidance(self, goal)
     local pos = self.object:get_pos()
     pos.y = pos.y + 1
     local yaw2goal = dir2yaw(vec_dir(pos, goal))
-    local outset = vec_add(pos, vec_multi(yaw2dir(yaw2goal), width))
     local collide, col_pos = get_collision(self, yaw2goal)
     local avd_pos
     if collide then

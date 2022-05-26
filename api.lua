@@ -7,7 +7,6 @@ creatura.api = {}
 -- Math --
 
 local pi = math.pi
-local pi2 = pi * 2
 local abs = math.abs
 local floor = math.floor
 local random = math.random
@@ -221,7 +220,7 @@ function creatura.get_next_move(self, pos2)
     if last_move
     and last_move.pos then
         local last_call = minetest.get_position_from_hash(last_move.pos)
-        local last_move = minetest.get_position_from_hash(last_move.move)
+        last_move = minetest.get_position_from_hash(last_move.move)
         if vector.equals(vec_center(last_call), vec_center(pos)) then
             return last_move
         end
@@ -286,7 +285,7 @@ function creatura.get_next_move_3d(self, pos2)
     if last_move
     and last_move.pos then
         local last_call = minetest.get_position_from_hash(last_move.pos)
-        local last_move = minetest.get_position_from_hash(last_move.move)
+        last_move = minetest.get_position_from_hash(last_move.move)
         if vector.equals(vec_center(last_call), vec_center(pos)) then
             return last_move
         end
