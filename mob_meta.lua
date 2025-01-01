@@ -508,7 +508,9 @@ function mob:set_mesh(id)
 		self.mesh_no = mesh_no
 		if self.mesh_textures then
 			self.textures = self.mesh_textures[mesh_no]
-			self.texture_no = random(#self.textures)
+			if self.texture_no == nil then -- CHANGED!
+				self.texture_no = random(#self.textures)
+			end
 			self:set_texture(self.texture_no, self.textures)
 		end
 		return meshes[mesh_no]
@@ -579,6 +581,7 @@ end
 
 function mob:play_sound(sound)
 	local spec = self.sounds and self.sounds[sound]
+	if not spec then return end -- CHANGED!
 	local parameters = {object = self.object}
 
 	if type(spec) == "table" then
